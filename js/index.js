@@ -71,7 +71,20 @@ const holidaySales = checkPriceAndStock.map(function(phones){
 //   }
 //   return "нет в наличии";
 // }
-// 2. Отсортировать массив телефонов по цене (от дорогих к дешевым)
 
+// 2. Отсортировать массив телефонов по цене (от дорогих к дешевым)
+function compareFunction(a, b) {
+  if ( a < b) {
+      return -1;
+  }
+  if ( a > b) {
+      return 1; 
+  }
+  return 0;   
+}
+
+const checkPhonesPrice = phones.sort(function(a,b){
+  return b.price - a.price;
+})
 // 3. Создать массивы с строками - именами производителей и массив с возможными цветами телефонов.
 // Переделать логику генерируемых телефонов чтобы они получали случайного производителя и цвет из списков
