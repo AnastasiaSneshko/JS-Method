@@ -34,8 +34,7 @@ const callbackStock = function(phones){
 console.log(phones.filter(callbackStock));
 
 // 2. Получить массив тех телефонов, которые есть в наличии
-
-const checkInStock = phones.filter(callbackStock);
+const checkInStock = phones.filter(callbackStock);;
 
 // 3. Получить массив телефонов для праздничной распродажи. Всем телефонам которые стоят больше 30000 снизить цену на 30%. Работать только с телефонами, которые есть в наличии
 const tallage = 70;
@@ -61,28 +60,18 @@ const holidaySales = checkPriceAndStock.map(function(phones){
 // Advanced
 // 1. Вывести в консоль для каждого элемента массива строку следующего вида:
 // '<Производитель> <Модель> со стоимостью <цена> сейчас <в наличии / нет в наличии>'
-// for(let i = 0; i < phones.length; i++){
-//   phones.toString()
-// }
-
-// function inStockPhrase() {
-//   if(phones.inStock === true){
-//     return "в наличии";
-//   }
-//   return "нет в наличии";
-// }
-
-// 2. Отсортировать массив телефонов по цене (от дорогих к дешевым)
-function compareFunction(a, b) {
-  if ( a < b) {
-      return -1;
-  }
-  if ( a > b) {
-      return 1; 
-  }
-  return 0;   
+function inStockString(phones){
+  return phones.inStock === true;
 }
 
+
+function stringArray(phones){
+  console.log(`${phones.manufacturer} ${phones.model} со стоимостью ${phones.price} сейчас в наличии`);
+};
+
+const comments = phones.forEach(stringArray);
+
+// 2. Отсортировать массив телефонов по цене (от дорогих к дешевым)
 const checkPhonesPrice = phones.sort(function(a,b){
   return b.price - a.price;
 })
