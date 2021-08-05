@@ -1,28 +1,41 @@
 const phones = [
-  {model: "Samsung Galaxy M32", manufacturer: "China", price: 6799, color:"Blue", inStock: true},
-  {model: "Samsung Galaxy M12", manufacturer: "China", price: 4399, color:"Black", inStock: false},
-  {model: "Apple iPhone 11", manufacturer: "USA", price: 19999, color:"Black", inStock: true},
-  {model: "Xiaomi Redmi Note 9", manufacturer: "China", price: 4999, color:"Grey", inStock: false},
-  {model: "OnePlus Nord N100", manufacturer: "China", price: 3999, color:"Frost", inStock: false},
-  {model: "Xiaomi Mi 1", manufacturer: "China", price: 30099, color:"Grey", inStock: true},
-  {model: "Samsung Galaxy S21", manufacturer: "China", price: 32999, color:"Red", inStock: true},
-  {model: "Huawei P30 Pro", manufacturer: "China", price: 10750, color:"Pink", inStock: true},
-  {model: "Samsung Galaxy S21", manufacturer: "China", price: 35999, color:"Blue", inStock: true},
-  {model: "Apple iPhone 12 Pro", manufacturer: "USA", price: 39999, color:"Gold", inStock: false},
-  {model: "Motorola RAZR", manufacturer: "USA", price: 36999, color:"Gold", inStock: true},
-  {model: "Samsung Galaxy Note 20", manufacturer: "China", price: 35999, color:"White", inStock: true},
-  {model: "Asus ROG Phone", manufacturer: "China", price: 33999, color:"Blue", inStock: true},
-  {model: "Samsung Galaxy Z Flip", manufacturer: "China", price: 23999, color:"Grey", inStock: false},
-  {model: "Huawei P30", manufacturer: "China", price: 8895, color:"Graey", inStock: true},
-  {model: "Poco X3 Pro", manufacturer: "China", price: 2854, color:"Silver", inStock: true},
-  {model: "Huawei P Smart", manufacturer: "China", price: 7999, color:"Red", inStock: true},
-  {model: "OPPO A54", manufacturer: "China", price: 4999, color:"Black", inStock: false},
-  {model: "Xperia XZ Dual", manufacturer: "China", price: 41799, color:"Gold", inStock: true},
-  {model: "Meizu M10", manufacturer: "China", price: 6799, color:"Blue", inStock: true},
-  {model: "Nokia G20", manufacturer: "China", price: 34799, color:"Black", inStock: false}
+  {model: "Galaxy M32", manufacturer: "Samsung", price: 6799, color:"Blue", inStock: true},
+  {model: "Galaxy M12", manufacturer: "Samsung", price: 4399, color:"Black", inStock: false},
+  {model: "iPhone 11", manufacturer: "Apple", price: 19999, color:"Black", inStock: true},
+  {model: "Redmi Note 9", manufacturer: "Xiaomi", price: 4999, color:"Grey", inStock: false},
+  {model: "Nord N100", manufacturer: "OnePlus", price: 3999, color:"Frost", inStock: false},
+  {model: "Mi 1", manufacturer: "Xiaomi", price: 30099, color:"Grey", inStock: true},
+  {model: "Galaxy S21", manufacturer: "Samsung", price: 32999, color:"Red", inStock: true},
+  {model: "P30 Pro", manufacturer: "Huawei", price: 10750, color:"Pink", inStock: true},
+  {model: "Galaxy S21", manufacturer: "Samsung", price: 35999, color:"Blue", inStock: true},
+  {model: "iPhone 12 Pro", manufacturer: "Apple", price: 39999, color:"Gold", inStock: false},
+  {model: "RAZR", manufacturer: "Motorola", price: 36999, color:"Gold", inStock: true},
+  {model: "Galaxy Note 20", manufacturer: "Samsung", price: 35999, color:"White", inStock: true},
+  {model: "ROG Phone", manufacturer: "Asus", price: 33999, color:"Blue", inStock: true},
+  {model: "Galaxy Z Flip", manufacturer: "Samsung", price: 23999, color:"Grey", inStock: false},
+  {model: "P30", manufacturer: "Huawei", price: 8895, color:"Graey", inStock: true},
+  {model: "X3 Pro", manufacturer: "Poco", price: 2854, color:"Silver", inStock: true},
+  {model: "P Smart", manufacturer: "Huawei", price: 7999, color:"Red", inStock: true},
+  {model: "A54", manufacturer: "OPPO", price: 4999, color:"Black", inStock: false},
+  {model: "Xperia XZ Dual", manufacturer: "Sony", price: 41799, color:"Gold", inStock: true},
+  {model: "M10", manufacturer: "Meizu", price: 6799, color:"Blue", inStock: true},
+  {model: "G20", manufacturer: "Nokia", price: 34799, color:"Black", inStock: false}
 ]
 
 // 1. Посчитать количество моделей телефонов в наличии и вывести в консоль
+function getAvaliablePhonesNumber(){
+  let amount = 0;
+
+  const forEachCallback = function(phones){
+    if(phones.inStock){
+      amount++;
+    }
+  }
+  
+  phones.forEach(forEachCallback);
+  return `${amount} телефонов в наличии`;
+}
+// 2. Получить массив тех телефонов, которые есть в наличии
 const inStock = function(inStock){
   return inStock === true;
 }
@@ -31,9 +44,6 @@ const callbackStock = function(phones){
   return inStock(phones.inStock);
 }
 
-console.log(phones.filter(callbackStock));
-
-// 2. Получить массив тех телефонов, которые есть в наличии
 const checkInStock = phones.filter(callbackStock);;
 
 // 3. Получить массив телефонов для праздничной распродажи. Всем телефонам которые стоят больше 30000 снизить цену на 30%. Работать только с телефонами, которые есть в наличии
@@ -60,16 +70,15 @@ const holidaySales = checkPriceAndStock.map(function(phones){
 // Advanced
 // 1. Вывести в консоль для каждого элемента массива строку следующего вида:
 // '<Производитель> <Модель> со стоимостью <цена> сейчас <в наличии / нет в наличии>'
-function inStockString(phones){
-  return phones.inStock === true;
+function getPhoneData (phones){
+  
+  const callback = function(phones){
+    const phoneStockMessage = phones.inStock ? 'в наличии' : 'нет в наличии';
+    console.log(`${phones.manufacturer} ${phones.model} со стоимостью ${phones.price} грн. сейчас ${phoneStockMessage}`);
+  }
+
+  phones.forEach(callback);
 }
-
-
-function stringArray(phones){
-  console.log(`${phones.manufacturer} ${phones.model} со стоимостью ${phones.price} сейчас в наличии`);
-};
-
-const comments = phones.forEach(stringArray);
 
 // 2. Отсортировать массив телефонов по цене (от дорогих к дешевым)
 const checkPhonesPrice = phones.sort(function(a,b){
